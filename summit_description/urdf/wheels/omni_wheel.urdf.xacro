@@ -7,13 +7,6 @@
   <xacro:property name="wheel_height" value="0.087" />
   <xacro:property name="wheel_mass" value="6.5" /> <!-- in kg-->
 
-  <!-- Simple Macro to calculate inertia -->
-  <xacro:macro name="cylinder_inertia" params="m r h">
-    <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
-              iyy="${m*r*r/2}" iyz = "0"
-              izz="${m*(3*r*r+h*h)/12}" />
-  </xacro:macro>
-
   <!-- Set up of the Wheel -->
   <xacro:macro name="omni_wheel" params="prefix parent *origin reflect">
 
@@ -45,7 +38,9 @@
         <!-- Propriedades para a inercia -->
         <mass value="${wheel_mass}" />
         <origin xyz="0 0 0" />
-        <cylinder_inertia  m="${wheel_mass}" r="${wheel_radius}" h="${wheel_height}" />
+          <inertia  ixx="${wheel_mass*(3*wheel_radius*wheel_radius+wheel_height*wheel_height)/12}" ixy = "0" ixz = "0"
+                    iyy="${wheel_mass*wheel_radius*wheel_radius/2}" iyz = "0"
+                    izz="${wheel_mass*(3*wheel_radius*wheel_radius+wheel_height*wheel_height)/12}" />
       </inertial>
     </link>
 
