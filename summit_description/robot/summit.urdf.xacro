@@ -14,22 +14,23 @@
 	<xacro:macro name="robot">
 		<xacro:summit_base/>
 
-		<xacro:omni_wheel prefix="summit_front_right" parent="summit_base_footprint" reflect="false">
+		<xacro:omni_wheel prefix="summit_front_right" parent="summit_base_link" reflect="false">
 			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:omni_wheel>
 
-		<xacro:omni_wheel prefix="summit_front_left" parent="summit_base_footprint" reflect="true">
+		<xacro:omni_wheel prefix="summit_front_left" parent="summit_base_link" reflect="true">
 			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:omni_wheel>
 
-		<xacro:omni_wheel prefix="summit_back_left" parent="summit_base_footprint" reflect="true">
+		<xacro:omni_wheel prefix="summit_back_left" parent="summit_base_link" reflect="true">
 			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:omni_wheel>
 
-		<xacro:omni_wheel prefix="summit_back_right" parent="summit_base_footprint" reflect="false">
+		<xacro:omni_wheel prefix="summit_back_right" parent="summit_base_link" reflect="false">
 			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:omni_wheel>
 
+        <xacro:omni_steering/>
    </xacro:macro>
 
    <xacro:robot/>
