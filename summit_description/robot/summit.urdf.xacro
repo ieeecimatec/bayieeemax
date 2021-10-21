@@ -4,6 +4,7 @@
 
 	<!-- Import summit XL wheels -->
 	<xacro:include filename="$(find summit_description)/urdf/wheels/omni_wheel.urdf.xacro" />
+	<xacro:include filename="$(find summit_description)/urdf/base/summit_base.gazebo.xacro" />
 	<xacro:include filename="$(find summit_description)/urdf/base/summit_base.urdf.xacro" />
 
 	<!-- Wheel parameters -->

@@ -13,7 +13,7 @@
   <!-- convert joint states to TF transforms for rviz, etc  -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
     <param name="robot_description" command="$(find xacro)/xacro '$(find summit_description)/robot/summit.urdf.xacro' --inorder" />
-  <node/>
+  </node>
 
   <!-- Spawn model -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
