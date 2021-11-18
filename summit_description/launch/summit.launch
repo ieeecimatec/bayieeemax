@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
 <launch>
+  <!-- Use "rosrun gazebo_ros gazebo" before launching-->
 
   <!-- Load the URDF into ROS parameter server -->
   <!-- O original era assim -->
   <!--command="$(find xacro)/xacro '$(find summit_description)/robot/summit.urdf.xacro' (2 simbolos de menos)inorder"-->
   
-  
+    <!-- start gazebo with an empty plane -->
+  <!--param name="/use_sim_time" value="true" /-->
+  <!-- node name="gazebo" pkg="gazebo" type="gazebo" args="$(find gazebo_worlds)/worlds/empty.world" respawn="false" output="screen"/ -->
 
   <!-- Publish joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
   <!-- convert joint states to TF transforms for rviz, etc  -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-    <param name="robot_description" command="$(find xacro)/xacro '$(find summit_description)/robot/summit.urdf.xacro' --inorder" />
-  </node>
-
+  <param name="robot_description" command="$(find xacro)/xacro '$(find summit_description)/robot/summit.urdf.xacro' --inorder" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
   <!-- Spawn model -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -x 0 -y 0 -z 0  -model summit -param robot_description"/>
