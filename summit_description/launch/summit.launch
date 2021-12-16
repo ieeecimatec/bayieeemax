@@ -6,9 +6,22 @@
   <!-- O original era assim -->
   <!--command="$(find xacro)/xacro '$(find summit_description)/robot/summit.urdf.xacro' (2 simbolos de menos)inorder"-->
   
-    <!-- start gazebo with an empty plane -->
-  <!--param name="/use_sim_time" value="true" /-->
-  <!-- node name="gazebo" pkg="gazebo" type="gazebo" args="$(find gazebo_worlds)/worlds/empty.world" respawn="false" output="screen"/ -->
+  <arg name="world_name" default="worlds/empty_world.world"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- start gazebo with an empty plane -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
 
   <!-- Publish joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
