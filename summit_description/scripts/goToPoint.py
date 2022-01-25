@@ -58,7 +58,7 @@ def clbk_odom(msg):
 def change_state(state):
     global state_
     state_ = state
-    print 'State changed to [%s]' % state_
+    print ('State changed to [%s]' % state_)
 
 def normalize_angle(angle):
     if(math.fabs(angle) > math.pi):
@@ -80,7 +80,7 @@ def fix_yaw(des_pos):
 
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_:
-        print 'Yaw error: [%s]' % err_yaw
+        print ('Yaw error: [%s]' % err_yaw)
         change_state(1)
 
 def go_straight_ahead(des_pos):
@@ -95,12 +95,12 @@ def go_straight_ahead(des_pos):
         twist_msg.angular.z = 0.2 if err_yaw > 0 else -0.2
         pub.publish(twist_msg)
     else:
-        print 'Position error: [%s]' % err_pos
+        print ('Position error: [%s]' % err_pos)
         change_state(2)
 
     # state change conditions
     if math.fabs(err_yaw) > yaw_precision_:
-        print 'Yaw error: [%s]' % err_yaw
+        print ('Yaw error: [%s]' % err_yaw)
         change_state(0)
 
 def done():
