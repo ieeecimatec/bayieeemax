@@ -30,3 +30,12 @@ The bayieeemax_launchs package provides some useful launch files for simulation.
 By default, it will start an empth world, but you can change it if you want.
 
 Also, if you want to make your own launch file, you can be based on the 'template.launch'.
+### Load 3d model
+Run:
+```bash
+$ roscore
+```
+And at another terminal run:
+```bash
+$ roslaunch summit_description/launch/summit.launch
+```
