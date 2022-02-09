@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Use "rosrun gazebo_ros gazebo" before launching-->
+
+  <!-- Load the URDF into ROS parameter server -->
+  <!-- O original era assim -->
+  <!--command="$(find xacro)/xacro '$(find summit_description)/robot/summit.urdf.xacro' (2 simbolos de menos)inorder"-->
+  
+  <arg name="world_name" default="worlds/ign_empty.sdf"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- start gazebo with an empty plane -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- Publish joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+  <!-- convert joint states to TF transforms for rviz, etc  -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find summit_description)/robot/summit.urdf.xacro' --inorder" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <!-- Spawn model -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -x 0 -y 0 -z 0  -model summit -param robot_description"/>
+
+</launch>
